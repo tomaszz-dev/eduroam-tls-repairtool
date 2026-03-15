@@ -21,7 +21,7 @@ int main() {
     }
     pclose(pipe);
 
-    std::cout << "Dostępne połączenia:" << std::endl;
+    std::cout << "Available connections:" << std::endl;
     for (int i = 0; i < connections.size(); i++) {
         std::cout << i + 1 << ". " << connections[i] << std::endl;
     }
@@ -30,19 +30,19 @@ int main() {
     std::string potwierdzenie;
 
     if (prawdopodobne_pol != -1) {
-        std::cout << "Znaleziono połączenie 'eduroam' o numerze " << prawdopodobne_pol + 1 << std::endl;
-        std::cout << "Kontynuować? t/n?" << std::endl;
+        std::cout << "Found 'eduroam' connection at number " << prawdopodobne_pol + 1 << std::endl;
+        std::cout << "Continue? t/n?" << std::endl;
         std::cin >> potwierdzenie;
         if (potwierdzenie == "T" || potwierdzenie == "t") {
             wybrane = connections[prawdopodobne_pol];
         } else {
-            std::cout << "Wybierz numer: ";
+            std::cout << "Choose number: ";
             int wybor;
             std::cin >> wybor;
             wybrane = connections[wybor - 1];
         }
     } else {
-        std::cout << "Wybierz numer: ";
+        std::cout << "Choose number: ";
         int wybor;
         std::cin >> wybor;
         wybrane = connections[wybor - 1];
@@ -53,10 +53,10 @@ int main() {
     FILE* pipe2 = popen(cmd.c_str(), "r");
     pclose(pipe2);
 
-    std::cout << "Restartowanie NetworkManager..." << std::endl;
+    std::cout << "Restarting NetworkManager..." << std::endl;
     system("systemctl restart NetworkManager.service");
 
-    std::cout << "Gotowe!" << std::endl;
+    std::cout << "Done!" << std::endl;
 
     return 0;
 }
